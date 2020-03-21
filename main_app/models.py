@@ -16,7 +16,8 @@ ACTIVITY = (
 # Create your models here.
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     height = models.IntegerField()
     weight = models.IntegerField()
     
@@ -32,7 +33,10 @@ class Profile(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        return self.first_name
+
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'profile_id':  self.id})
 
 class Meal(models.Model):
     date = models.DateField(date.today())
