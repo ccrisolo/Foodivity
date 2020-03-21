@@ -22,15 +22,17 @@ class Profile(models.Model):
     
     activity_level = models.CharField(
         max_length=1,
-        choices = ACTIVITY
+        choices=ACTIVITY,
+        default=[0][0]
     )
     sex = models.CharField(
         max_length=1,
-        choices = SEX
+        choices=SEX,
+        default=[0][0]
     )
 
-
-
+    def __str__(self):
+        return self.name
 
 class Meal(models.Model):
     date = models.DateField(date.today())
