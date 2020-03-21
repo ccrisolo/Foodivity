@@ -12,6 +12,10 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+def profile_index(request):
+    profile = Profile.objects.filter(user = request.user)
+    return render(request, 'profile/index.html', {'profile': profile})
+
 def profile_detail(request, profile_id):
     profile = Profile.objects.get(id=profile_id)
     return render(request, 'profile/detail.html', {
