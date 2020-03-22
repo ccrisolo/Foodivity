@@ -53,6 +53,33 @@
             {% endfor %}
           </tbody>
         </table>
+        <table class="striped">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Meal</th>
+              <th>Ingredients</th>
+              <th>Calories</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            {% for activity in p.activity_set.all %}
+            <tr>
+              <td>{{ activity.date }}</td>
+              <td>{{ activity.type_activity }}</td>
+              <td>{{ activity.activity_intensity }}</td>
+              <td>{{ activity.duration }}</td>
+              <td>{{activity.calories_burned}}</td>
+              <td><div class="card-action">
+                <a href="{% url 'update_activity' activity.id %}">Edit</a>
+                <a href="{% url 'delete_activity' activity.id %}">Delete</a>
+              </div></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <a href="{% url 'activity_create' p.id %}">Add Activity</a>
       </div>
     </div>
   </div>

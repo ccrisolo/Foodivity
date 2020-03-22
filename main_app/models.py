@@ -59,6 +59,10 @@ class Meal(models.Model):
         return reverse('index')
 
 class Activity(models.Model):
+    date = models.DateField(
+        blank=True,
+        null=True
+    )
     type_activity =  models.CharField(max_length=100)
     duration = models.IntegerField()
     calories_burned = models.IntegerField()
@@ -68,3 +72,5 @@ class Activity(models.Model):
         choices=INTENSITY, 
         default=[0][0]
     )
+    def __str__(self):
+        return self.type_activity
