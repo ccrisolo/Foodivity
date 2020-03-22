@@ -72,8 +72,6 @@
               <td>{{ activity.duration }}</td>
               <td>{{activity.calories_burned}}</td>
               <td><div class="card-action">
-                <a href="{% url 'update_activity' activity.id %}">Edit</a>
-                <a href="{% url 'delete_activity' activity.id %}">Delete</a>
               </div></td>
             </tr>
             {% endfor %}
