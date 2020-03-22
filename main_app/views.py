@@ -1,26 +1,30 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.views.generic import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .models import Profile, Meal
+from .forms import MealForm
 
 # Create your views here.
 def home(request):
-    return HttpResponse('<h1>Foodivity</h1>')
+    return render(request, 'home.html')
 
 def about(request):
     return render(request, 'about.html')
 
 def profile_index(request):
     profile = Profile.objects.filter(user = request.user)
-    return render(request, 'profile/index.html', {'profile': profile})
+    meal_form = MealForm()
+    return render(request, 'profile/index.html', {'profile': profile, 'meal_form': meal_form})
 
-def profile_detail(request, profile_id):
-    profile = Profile.objects.get(id=profile_id)
-    return render(request, 'profile/detail.html', {
-        'profile': profile,
-    })
+def add_meal(request, profile_id):
+    form = MealForm(request.POST)
+    if form.is_valid():
+        new_meal = form.save(commit=False)
+        new_meal.profile_id = profile_id
+        new_meal.save()
+    return redirect('index')
 
 def signup(request):
   error_message = ''
@@ -38,12 +42,16 @@ def signup(request):
 
 class ProfileCreate(CreateView):
     model = Profile
-    fields = ['height', 'weight', 'sex', 'activity_level']
+    fields = ['first_name', 'last_name', 'height', 'weight', 'sex', 'activity_level']
     
     def form_valid(self, form):
-    # Assign the logged in user (self.request.user)
-        form.instance.user = self.request.user  # form.instance is the cat
-    # Let the CreateView do its job as usual
+        form.instance.user = self.request.user
         return super().form_valid(form)
 
+class MealUpdate(UpdateView):
+  model = Meal
+  fields = ['date', 'name', 'ingredients', 'calories']
 
+class MealDelete(DeleteView):
+  model = Meal
+  success_url = '/profile/'

@@ -36,10 +36,10 @@ class Profile(models.Model):
         return self.first_name
 
     def get_absolute_url(self):
-        return reverse('detail', kwargs={'profile_id':  self.id})
+        return reverse('index')
 
 class Meal(models.Model):
-    date = models.DateField(date.today())
+    date = models.DateField()
     name = models.CharField(max_length=25)
     ingredients = models.CharField(max_length=100)
     calories = models.IntegerField()
@@ -48,4 +48,7 @@ class Meal(models.Model):
 
     def __str__(self):
         return f"{self.name} on {self.date} has {self.calories}"
+
+    def get_absolute_url(self):
+        return reverse('index')
 
