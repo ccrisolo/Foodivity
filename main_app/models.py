@@ -13,6 +13,12 @@ ACTIVITY = (
     ('M', 'moderate'),
     ('H', 'high')
 )
+INTENSITY= ( 
+    ('L', 'light'),
+    ('M', 'moderate'),
+    ('S', 'strenuous'),
+    ('V', 'very strenuous')
+)
 # Create your models here.
 class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -52,3 +58,13 @@ class Meal(models.Model):
     def get_absolute_url(self):
         return reverse('index')
 
+class Activity(models.Model):
+    type_activity =  models.CharField(max_length=100)
+    duration = models.IntegerField()
+    calories_burned = models.IntegerField()
+    # changed to autofill calories based on duration and intensity 
+    activity_intensity = models.CharField(
+        max_length=1,
+        choices=INTENSITY, 
+        default=[0][0]
+    )
