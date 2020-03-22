@@ -72,5 +72,6 @@ class Activity(models.Model):
         choices=INTENSITY, 
         default=[0][0]
     )
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     def __str__(self):
         return self.type_activity
