@@ -59,9 +59,12 @@ class MealDelete(DeleteView):
 class ActivityCreate(CreateView):
   model = Activity 
   fields = ['type_activity', 'duration', 'calories_burned', 'date', 'activity_intensity']
-  
-  # # def form_valid(self, form):
-  #       form.instance.user = self.request.user
-  #       return super().form_valid(form)
   success_url = '/profile/'
 
+class ActivityUpdate(UpdateView):
+  model = Activity
+  fields = ['type_activity', 'duration', 'calories_burned', 'date', 'activity_intensity']
+  
+class ActivityDelete(DeleteView):
+  model = Activity
+  success_url = '/profile/'
