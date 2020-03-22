@@ -8,6 +8,13 @@
     <input type="submit" value="Submit!" class="btn">
   </form>
   <script>  
+  var dateEl = document.getElementById('id_date');
+  M.Datepicker.init(dateEl, {
+    format: 'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+  });
     var selectEl = document.getElementById('id_activity_intensity');
     M.FormSelect.init(selectEl);
   </script>
