@@ -33,6 +33,9 @@
             <tr>
               <th>Date</th>
               <th>Meal</th>
+              <th>Ingredients</th>
+              <th>Calories</th>
+              
             </tr>
           </thead>
           <tbody>
@@ -40,6 +43,8 @@
             <tr>
               <td>{{meal.date}}</td>
               <td>{{meal.name}}</td>
+              <td>{{meal.ingredients}}</td>
+              <td>{{meal.calories}}</td>
               <td><div class="card-action">
                 <a href="{% url 'update_meal' meal.id %}">Edit</a>
                 <a href="{% url 'delete_meal' meal.id %}">Delete</a>
