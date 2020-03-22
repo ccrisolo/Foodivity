@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, Meal
+from .models import Profile, Meal, Activity
 from .forms import MealForm
 
 # Create your views here.
@@ -54,5 +54,14 @@ class MealUpdate(UpdateView):
 
 class MealDelete(DeleteView):
   model = Meal
+  success_url = '/profile/'
+  
+class ActivityCreate(CreateView):
+  model = Activity 
+  fields = ['type_activity', 'duration', 'calories_burned', 'date', 'activity_intensity']
+  
+  # # def form_valid(self, form):
+  #       form.instance.user = self.request.user
+  #       return super().form_valid(form)
   success_url = '/profile/'
 
