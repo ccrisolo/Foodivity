@@ -75,3 +75,6 @@ class Activity(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     def __str__(self):
         return self.type_activity
+    
+    def get_absolute_url(self):
+        return reverse('index')
