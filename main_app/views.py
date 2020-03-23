@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 import uuid
 import boto3
 
-from .models import Profile, Meal, Activity, Photo
+from .models import Profile, Meal, Activity, ProfilePhoto, MealPhoto
 from .forms import MealForm
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
@@ -33,7 +33,24 @@ def add_meal(request, profile_id):
         new_meal.save()
     return redirect('index')
 
-def add_photo(request, profile_id):
+def add_photo_profile(request, profile_id):
+    print(profile_id)
+    photo_file = request.FILES.get('photo-file', None)
+    print(photo_file)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = ProfilePhoto(url=url, profile_id=profile_id)
+            print(photo)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('index')
+
+def add_photo_meal(request, meal_id):
     photo_file = request.FILES.get('photo-file', None)
     if photo_file:
         s3 = boto3.client('s3')
@@ -41,7 +58,7 @@ def add_photo(request, profile_id):
         try:
             s3.upload_fileobj(photo_file, BUCKET, key)
             url = f"{S3_BASE_URL}{BUCKET}/{key}"
-            photo = Photo(url=url, profile_id=profile_id)
+            photo = MealPhoto(url=url, meal_id=meal_id)
             photo.save()
         except:
             print('An error occurred uploading file to S3')
@@ -91,7 +108,11 @@ class ActivityDelete(DeleteView):
   success_url = '/profile/'
   
 
-class PhotoDelete(DeleteView):
-  model = Photo
+class ProfilePhotoDelete(DeleteView):
+  model = ProfilePhoto
+  success_url = '/profile/'
+
+class MealPhotoDelete(DeleteView):
+  model = MealPhoto
   success_url = '/profile/'
   

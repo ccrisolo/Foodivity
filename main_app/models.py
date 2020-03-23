@@ -79,9 +79,16 @@ class Activity(models.Model):
     def get_absolute_url(self):
         return reverse('index')
     
-class Photo(models.Model):
+class ProfilePhoto(models.Model):
     url = models.CharField(max_length=200)
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"Photo for profile_id: {self.profile_id} @{self.url}"
+
+class MealPhoto(models.Model):
+    url = models.CharField(max_length=200)
+    meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return f"Photo for meal_id: {self.meal_id} @{self.url}"
