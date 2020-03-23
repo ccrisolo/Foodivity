@@ -12,78 +12,89 @@
         <p>Weight: {{ p.weight }}</p>
         <p>Sex: {{ p.sex }}</p>
         <p>Activity Level: {{ p.activity_level }}</p>
-
       </div>
-
     </div>
     <!-- Insert photo markup below this comment -->
+    {% for photo in p.photo_set.all %}
+    <img class="responsive-img card-panel" src="{{photo.url}}">
+    {% empty %}
+    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
+    {% endfor %}
+    <form action="{% url 'add_photo' p.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+      {% csrf_token %}
+      <input type="file" name="photo-file">
+      <br><br>
+      <input type="submit" class="btn" value="Upload Photo">
+    </form>
   </div>
-
   <div class="col s6">
     <div class="card">
       <div class="card-content">
-
         <form action="{% url 'add_meal' p.id %}" method="post">
-          {% csrf_token %}
-          {{ meal_form.as_p }}
-          <input type="submit" class="btn" value="Add Meal">
-        </form>
-        <table class="striped">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Meal</th>
-              <th>Ingredients</th>
-              <th>Calories</th>
-              
-            </tr>
-          </thead>
-          <tbody>
-            {% for meal in p.meal_set.all %}
-            <tr>
-              <td>{{meal.date}}</td>
-              <td>{{meal.name}}</td>
-              <td>{{meal.ingredients}}</td>
-              <td>{{meal.calories}}</td>
-              <td><div class="card-action">
-                <a href="{% url 'update_meal' meal.id %}">Edit</a>
-                <a href="{% url 'delete_meal' meal.id %}">Delete</a>
-              </div></td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        <table class="striped">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Activity Type</th>
-              <th>Intensity</th>
-              <th>Duration</th>
-              <th>Calories Burned</th>
-              
-            </tr>
-          </thead>
-          <tbody>
-            {% for activity in p.activity_set.all %}
-            <tr>
-              <td>{{ activity.date }}</td>
-              <td>{{ activity.type_activity }}</td>
-              <td>{{ activity.activity_intensity }}</td>
-              <td>{{ activity.duration }}</td>
-              <td>{{activity.calories_burned}}</td>
-              <td><div class="card-action">
-                <a href="{% url 'update_activity' activity.id %}">Edit</a>
-                <a href="{% url 'delete_activity' activity.id %}">Delete</a>
-              </div></td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        <a href="{% url 'activity_create' p.id %}">Add Activity</a>
-      </div>
-    </div>
+    {% csrf_token %}
+    {{ meal_form.as_p }}
+    <input type="submit" class="btn" value="Add Meal">
+    </form>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Meal</th>
+          <th>Ingredients</th>
+          <th>Calories</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for meal in p.meal_set.all %}
+        <tr>
+          <td>{{meal.date}}</td>
+          <td>{{meal.name}}</td>
+          <td>{{meal.ingredients}}</td>
+          <td>{{meal.calories}}</td>
+          <td>
+            <div class="card-action">
+              <a href="{% url 'update_meal' meal.id %}">Edit</a>
+              <a href="{% url 'delete_meal' meal.id %}">Delete</a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <table class="striped">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Activity Type</th>
+          <th>Intensity</th>
+          <th>Duration</th>
+          <th>Calories Burned</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for activity in p.activity_set.all %}
+        <tr>
+          <td>{{ activity.date }}</td>
+          <td>{{ activity.type_activity }}</td>
+          <td>{{ activity.activity_intensity }}</td>
+          <td>{{ activity.duration }}</td>
+          <td>{{activity.calories_burned}}</td>
+          <td>
+            <div class="card-action">
+              <a href="{% url 'update_activity' activity.id %}">Edit</a>
+              <a href="{% url 'delete_activity' activity.id %}">Delete</a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{% url 'activity_create' p.id %}">Add Activity</a>
   </div>
+</div>
+</div>
 </div>
 {% endfor %}
 <script>
