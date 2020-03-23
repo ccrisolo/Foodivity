@@ -98,6 +98,12 @@ class ActivityCreate(CreateView):
   model = Activity 
   fields = ['type_activity', 'duration', 'calories_burned', 'date', 'activity_intensity']
   success_url = '/profile/'
+  
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    # url params are available as a kwarg on self as follows
+    form.instance.profile_id = self.kwargs['profile_id']
+    return super().form_valid(form)
 
 class ActivityUpdate(UpdateView):
   model = Activity
@@ -107,7 +113,6 @@ class ActivityDelete(DeleteView):
   model = Activity
   success_url = '/profile/'
   
-
 class ProfilePhotoDelete(DeleteView):
   model = ProfilePhoto
   success_url = '/profile/'
