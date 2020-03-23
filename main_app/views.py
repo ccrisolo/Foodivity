@@ -45,7 +45,7 @@ def add_photo(request, profile_id):
             photo.save()
         except:
             print('An error occurred uploading file to S3')
-    return redirect('index', profile_id=profile_id)
+    return redirect('index')
 
 def signup(request):
   error_message = ''
@@ -90,4 +90,8 @@ class ActivityDelete(DeleteView):
   model = Activity
   success_url = '/profile/'
   
+
+class PhotoDelete(DeleteView):
+  model = Photo
+  success_url = '/profile/'
   
