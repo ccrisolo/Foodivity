@@ -13,7 +13,8 @@ urlpatterns = [
     path('activity/<int:pk>/update/', views.ActivityUpdate.as_view(), name='update_activity'),
     path('activity/<int:pk>/delete/', views.ActivityDelete.as_view(), name='delete_activity'),
     path('profile/<int:profile_id>/activity/create/', views.ActivityCreate.as_view(), name='activity_create'),
-    path('profile/<int:profile_id>/add_photo/', views.add_photo, name='add_photo'),
-    path('profile/<int:pk>/delete/', views.PhotoDelete.as_view(), name='delete_photo'),
-    
+    path('profile/<int:profile_id>/add_photo/', views.add_photo_profile, name='add_photo_profile'),
+    path('profile/<int:pk>/delete_photo/', views.ProfilePhotoDelete.as_view(), name='delete_photo_profile'),
+    path('meal/<int:meal_id>/add_photo/', views.add_photo_meal, name='add_photo_meal'),
+    path('meal/<int:pk>/delete_photo/', views.MealPhotoDelete.as_view(), name='delete_photo_meal')
 ]
