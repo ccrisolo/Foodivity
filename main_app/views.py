@@ -3,8 +3,15 @@ from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from .models import Profile, Meal, Activity
+
+import uuid
+import boto3
+
+from .models import Profile, Meal, Activity, Photo
 from .forms import MealForm
+
+S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
+BUCKET = 'foodivity'
 
 # Create your views here.
 def home(request):
@@ -25,6 +32,20 @@ def add_meal(request, profile_id):
         new_meal.profile_id = profile_id
         new_meal.save()
     return redirect('index')
+
+def add_photo(request, profile_id):
+    photo_file = request.FILES.get('photo-file', None)
+    if photo_file:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:6] + photo_file.name[photo_file.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(photo_file, BUCKET, key)
+            url = f"{S3_BASE_URL}{BUCKET}/{key}"
+            photo = Photo(url=url, profile_id=profile_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('index', profile_id=profile_id)
 
 def signup(request):
   error_message = ''
@@ -68,3 +89,5 @@ class ActivityUpdate(UpdateView):
 class ActivityDelete(DeleteView):
   model = Activity
   success_url = '/profile/'
+  
+  
