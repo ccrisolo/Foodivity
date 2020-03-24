@@ -46,7 +46,10 @@
             </tr>
           </thead>
           <tbody>
+            
             <p>{{ total_calories }} calories consumed</p>
+            <p>{{ burned_calories }} calories burned</p>
+            <p>{{ remaining_calories }} remaining</p>
             {% for meal in p.meal_set.all %}
             <tr>
               <td>{{meal.date}}</td>
