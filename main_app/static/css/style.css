@@ -1,3 +1,11 @@
+:root {
+  --white: #F7F6F5;
+  --green: #5E8461;
+  --yellow: #EAA51D;
+  --red: #A1423F;
+  --dark: #252930;
+}
+
 body {
     display: flex;
     min-height: 100vh;
@@ -8,6 +16,15 @@ body {
   a {
     color: darkmagenta;
   }
+
+nav{
+  background-color: var(--yellow);
+}
+
+.left {
+  float: left;
+  font-family: 'Righteous', cursive;
+}
   
   main {
     flex: 1 0 auto;
