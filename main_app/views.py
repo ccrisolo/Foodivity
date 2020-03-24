@@ -23,7 +23,9 @@ def about(request):
 def profile_index(request):
     profile = Profile.objects.filter(user = request.user)
     meal_form = MealForm()
-    return render(request, 'profile/index.html', {'profile': profile, 'meal_form': meal_form})
+    meals = Meal.objects.filter(profile__in = profile )
+    total_calories = sum(meal.calories for meal in meals)
+    return render(request, 'profile/index.html', {'profile': profile, 'meal_form': meal_form, 'total_calories': total_calories})
 
 def add_meal(request, profile_id):
     form = MealForm(request.POST)
@@ -120,4 +122,3 @@ class ProfilePhotoDelete(DeleteView):
 class MealPhotoDelete(DeleteView):
   model = MealPhoto
   success_url = '/profile/'
-  
