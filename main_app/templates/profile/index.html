@@ -1,20 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
 {% for p in profile %}
-<h1>{{ p.first_name }}'s Profile</h1>
+
+
+<h1 class="center">{{ p.first_name }}'s Profile</h1>
 
 <div class="row">
-  <div class="col s6">
+
+  <div class="col s4">
+
+    <!-- User profile info -->
     <div class="card">
       <div class="card-content">
-        <span class="card-title"></span>
+        <span class="card-title">ABOUT ME</span>
+        <div class="card-panel">PICTURE</div>
+        <div class="card-panel">
         <p>Height: {{ p.height }}</p>
         <p>Weight: {{ p.weight }}</p>
         <p>Sex: {{ p.sex }}</p>
         <p>Activity Level: {{ p.activity_level }}</p>
+        </div>
       </div>
     </div>
-    <!-- Insert photo markup below this comment -->
+
+    <!-- Calorie counter -->
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">CALORIE COUNTER</span>
+        <p>{{ total_calories }} calories consumed</p>
+        <p>{{ burned_calories }} calories burned</p>
+        <p>{{ remaining_calories }} remaining</p>
+      </div>
+    </div>
+
+    <!-- User profile photo -->
     {% for photo in p.profilephoto_set.all %}
     <img class="responsive-img card-panel" src="{{photo.url}}">
     <a href="{% url 'delete_photo_profile' photo.id %}">Delete</a>
@@ -27,15 +46,26 @@
       <br><br>
       <input type="submit" class="btn" value="Upload Photo">
     </form>
+
   </div>
-  <div class="col s6">
+
+
+
+  <div class="col s7">
+
+    <!-- Meal Info -->
     <div class="card">
       <div class="card-content">
+        <span class="card-title">MEALS</span>
+
+        <!-- Add meal -->
         <form action="{% url 'add_meal' p.id %}" method="post">
           {% csrf_token %}
           {{ meal_form.as_p }}
           <input type="submit" class="btn" value="Add Meal">
         </form>
+
+        <!-- Views Meals -->
         <table class="striped">
           <thead>
             <tr>
@@ -46,10 +76,6 @@
             </tr>
           </thead>
           <tbody>
-            
-            <p>{{ total_calories }} calories consumed</p>
-            <p>{{ burned_calories }} calories burned</p>
-            <p>{{ remaining_calories }} remaining</p>
             {% for meal in p.meal_set.all %}
             <tr>
               <td>{{meal.date}}</td>
@@ -57,28 +83,40 @@
               <td>{{meal.ingredients}}</td>
               <td>{{meal.calories}}</td>
               <td>
+
                 <div class="card-action">
                   <a href="{% url 'update_meal' meal.id %}">Edit</a>
                   <a href="{% url 'delete_meal' meal.id %}">Delete</a>
                 </div>
+
+                <!-- Add meal photo -->
                 {% for photo in meal.mealphoto_set.all %}
                 <img class="responsive-img card-panel" src="{{photo.url}}">
                 <a href="{% url 'delete_photo_meal' photo.id %}">Delete</a>
                 {% empty %}
                 <div class="card-panel teal-text center-align">No Photos Uploaded</div>
                 {% endfor %}
-                <form action="{% url 'add_photo_meal' meal.id %}" enctype="multipart/form-data" method="POST"
-                  class="card-panel">
+                <form action="{% url 'add_photo_meal' meal.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
                   {% csrf_token %}
                   <input type="file" name="photo-file">
                   <br><br>
                   <input type="submit" class="btn" value="Upload Photo">
                 </form>
+
               </td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
+
+      </div>
+    </div>
+
+    <!-- Activity info -->
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">ACTIVITIES</span>
+
         <table class="striped">
           <thead>
             <tr>
