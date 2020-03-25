@@ -92,4 +92,4 @@ class MealPhoto(models.Model):
     meal = models.ForeignKey(Meal, on_delete=models.CASCADE)
     
     def __str__(self):
-        return f"Photo for meal_id: {self.meal_id} @{self.url}"
+        return self.url

@@ -14,9 +14,6 @@ S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'foodivity'
 
 # Create your views here.
-# def base(request):
-#   profile = Profile.objects.filter(user = request.user)
-#   return render(request, 'base.html', {'profile': profile})
 
 def home(request):
     return render(request, 'home.html')
@@ -25,14 +22,16 @@ def about(request):
     return render(request, 'about.html')
 
 def profile_index(request):
-    profile = Profile.objects.filter(user = request.user)
+    profile = Profile.objects.get(user = request.user)
     meal_form = MealForm()
-    meals = Meal.objects.filter(profile__in = profile)
-    activities = Activity.objects.filter(profile__in = profile)
+    meals = Meal.objects.filter(profile = profile)
+    activities = Activity.objects.filter(profile = profile)
+    suggested_cal_male = ((10 * profile.weight) + (6.25 * profile.height) + 5)
+    suggested_cal_female = ((10 * profile.weight) + (6.25 * profile.height) - 161)
     total_calories = sum(meal.calories for meal in meals)
     burned_calories = sum(activity.calories_burned for activity in activities)
     remaining_calories = (total_calories - burned_calories)
-    return render(request, 'profile/index.html', {'profile': profile, 'meal_form': meal_form, 'total_calories': total_calories, 'burned_calories': burned_calories, 'remaining_calories': remaining_calories})
+    return render(request, 'profile/index.html', {'profile': profile, 'meal_form': meal_form, 'total_calories': total_calories, 'burned_calories': burned_calories, 'remaining_calories': remaining_calories, 'suggested_cal_male': suggested_cal_male, 'suggested_cal_female': suggested_cal_female})
 
 def add_meal(request, profile_id):
     form = MealForm(request.POST)
@@ -98,7 +97,7 @@ class ProfileCreate(CreateView):
 class ProfileUpdate(UpdateView):
   model = Profile
   fields = ['first_name', 'last_name', 'height', 'weight', 'sex', 'activity_level']
-
+  
 class MealUpdate(UpdateView):
   model = Meal
   fields = ['date', 'name', 'ingredients', 'calories']
