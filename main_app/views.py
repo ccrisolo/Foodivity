@@ -98,7 +98,7 @@ class ProfileCreate(CreateView):
 class ProfileUpdate(UpdateView):
   model = Profile
   fields = ['first_name', 'last_name', 'height', 'weight', 'sex', 'activity_level']
-
+  
 class MealUpdate(UpdateView):
   model = Meal
   fields = ['date', 'name', 'ingredients', 'calories']
