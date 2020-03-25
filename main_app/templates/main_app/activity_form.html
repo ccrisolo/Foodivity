@@ -1,17 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
 {% if object %}
+<div class="card">
 <h1>Edit <span class="teal-text">{{object.name}}</span></h1>
 {% else %}
 <h1>Add Activity</h1>
 {% endif %}
+<div class="card">
 <form action="" method="post">
   {% csrf_token %}
   <table>
     {{ form.as_table }}
   </table>
   <input type="submit" value="Submit!" class="btn">
+</div>
 </form>
+</div>
   <script>  
   var dateEl = document.getElementById('id_date');
   M.Datepicker.init(dateEl, {

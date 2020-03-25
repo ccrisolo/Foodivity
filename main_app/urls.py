@@ -7,6 +7,7 @@ urlpatterns = [
     path('profile/', views.profile_index, name='index'),
     path('accounts/signup/', views.signup, name='signup'),
     path('profile/create/', views.ProfileCreate.as_view(), name='profile_create'),
+    path('profile/<int:pk>/update', views.ProfileUpdate.as_view(), name='update_profile'),
     path('profile/<int:profile_id>/add_meal/', views.add_meal, name='add_meal'),
     path('meal/<int:pk>/delete/', views.MealDelete.as_view(), name='delete_meal'),
     path('meal/<int:pk>/update/', views.MealUpdate.as_view(), name='update_meal'),
@@ -16,5 +17,5 @@ urlpatterns = [
     path('profile/<int:profile_id>/add_photo/', views.add_photo_profile, name='add_photo_profile'),
     path('profile/<int:pk>/delete_photo/', views.ProfilePhotoDelete.as_view(), name='delete_photo_profile'),
     path('meal/<int:meal_id>/add_photo/', views.add_photo_meal, name='add_photo_meal'),
-    path('meal/<int:pk>/delete_photo/', views.MealPhotoDelete.as_view(), name='delete_photo_meal')
+    path('meal/<int:pk>/delete_photo/', views.MealPhotoDelete.as_view(), name='delete_photo_meal'),
 ]
