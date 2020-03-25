@@ -1,29 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
-{% for p in profile %}
 
 
-<!-- <h1 class="center">{{ p.first_name }}'s Profile</h1> -->
+<!-- <h1 class="center">{{ profile.first_name }}'s Profile</h1> -->
 
-<h1>hello, {{p.first_name}}!</h1>
+<h1>hello, {{profile.first_name}}!</h1>
 <h2>what did you do today gang?</h2>
 <div class="row">
 
-  <div class="col s4">
+  <div class="col s10 offset-s1 m4 l4">
 
     <!-- User profile info -->
     <div class="card">
       <div class="card-content">
-        <span class="card-title">{{p.first_name}} {{p.last_name}}</span>
+        <span class="card-title">{{profile.first_name}} {{profile.last_name}}</span>
         <div class="card-panel">
 
-          <img class="responsive-img" src="{{ p.profilephoto_set.last }}">
+          <img class="responsive-img" src="{{ profile.profilephoto_set.last }}">
 
         </div>
-        <p>Height: {{ p.height }}</p>
-        <p>Weight: {{ p.weight }}</p>
-        <p>Sex: {{ p.sex }}</p>
-        <p>Activity Level: {{ p.activity_level }}</p>
+        <p>Height: {{ profile.height }}</p>
+        <p>Weight: {{ profile.weight }}</p>
+        <p>Sex: {{ profile.sex }}</p>
+        <p>Activity Level: {{ profile.activity_level }}</p>
       </div>
     </div>
 
@@ -31,20 +30,24 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">CALORIE COUNTER</span>
+        {% if profile.sex == 'F' %} 
+        <p>Suggested calories per day: {{ suggested_cal_female }}</p>
+    {% else %}
+        <p>Suggested calories per day: {{ suggested_cal_male }}</p>
+    {% endif %}
         <p>{{ total_calories }} calories consumed</p>
         <p>{{ burned_calories }} calories burned</p>
-        <p>{{ remaining_calories }} remaining</p>
       </div>
     </div>
 
     <!-- User profile photo -->
-    <!-- {% for photo in p.profilephoto_set.all %}
+    <!-- {% for photo in profile.profilephoto_set.all %}
     <img class="responsive-img card-panel" src="{{photo.url}}">
     <a href="{% url 'delete_photo_profile' photo.id %}">Delete</a>
     {% empty %}
     <div class="card-panel teal-text center-align">No Photos Uploaded</div>
     {% endfor %}
-    <form action="{% url 'add_photo_profile' p.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+    <form action="{% url 'add_photo_profile' profile.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
       {% csrf_token %}
       <input type="file" name="photo-file">
       <br><br>
@@ -55,7 +58,7 @@
 
 
 
-  <div class="col s7 offset-s1">
+  <div class="col s12 m8 l7 offset-l1">
 
     <!-- Meal Info -->
     <div class="card">
@@ -63,7 +66,7 @@
         <span class="card-title">MEALS</span>
 
         <!-- Add meal -->
-        <form action="{% url 'add_meal' p.id %}" method="post">
+        <form action="{% url 'add_meal' profile.id %}" method="post">
           {% csrf_token %}
           {{ meal_form.as_p }}
           <input type="submit" class="btn" value="Add Meal">
@@ -74,8 +77,8 @@
         <br>
 
         <!-- New view meal-->
-        {% for meal in p.meal_set.all %}
-        <div class="card">
+        {% for meal in profile.meal_set.all %}
+        <div class="card meal-card">
           <div class="card-image waves-effect waves-block waves-light">
             <img class="activator" src="{{ meal.mealphoto_set.last.url }}">
           </div>
@@ -121,7 +124,7 @@
             </tr>
           </thead>
           <tbody>
-            {% for activity in p.activity_set.all %}
+            {% for activity in profile.activity_set.all %}
             <tr>
               <td>{{ activity.date }}</td>
               <td>{{ activity.type_activity }}</td>
@@ -137,12 +140,11 @@
             {% endfor %}
           </tbody>
         </table>
-        <a href="{% url 'activity_create' p.id %}">Add Activity</a>
+        <a href="{% url 'activity_create' profile.id %}">Add Activity</a>
       </div>
     </div>
   </div>
 </div>
-{% endfor %}
 <script>
   var dateEl = document.getElementById('id_date');
   M.Datepicker.init(dateEl, {
