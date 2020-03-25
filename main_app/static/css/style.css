@@ -1,20 +1,36 @@
 :root {
   --white: #F7F6F5;
   --green: #5E8461;
-  --yellow: #EAA51D;
+  --mustard: #EAA51D;
   --red: #A1423F;
   --dark: #252930;
+
+  --bluegray: #949EA0;
+  --yellow: #F1E76F;
+  --darkg: #2D2E32;
 }
 
 body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    font-family: 'Hind Madurai', sans-serif;
-  }
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  font-family: 'Hind Madurai', sans-serif;
+  background-color: var(--bluegray);
+  color: var(--darkg);
+}
 
 nav{
-  background-color: var(--yellow);
+  background-color: var(--darkg);
+  box-shadow: transparent;
+}
+
+h1 {
+  font-weight: bolder;
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
 }
 
 .left {
@@ -24,6 +40,25 @@ nav{
   
 main {
   flex: 1 0 auto;
+}
+
+.card {
+  font-weight: bolder;
+  background-color: var(--white);
+  /* background-color: rgba(255, 255, 255, .5); */
+  box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+th {
+  color: black;
+}
+
+.btn {
+  background-color: var(--yellow);
+}
+
+.btn:hover{
+  background-color: springgreen;
 }
 
 footer.page-footer {

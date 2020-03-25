@@ -26,6 +26,7 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=100)
     height = models.IntegerField()
     weight = models.IntegerField()
+
     
     activity_level = models.CharField(
         max_length=1,
@@ -84,7 +85,7 @@ class ProfilePhoto(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Photo for profile_id: {self.profile_id} @{self.url}"
+        return self.url
 
 class MealPhoto(models.Model):
     url = models.CharField(max_length=200)
