@@ -2,16 +2,21 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Madurai&family=Righteous&family=Signika+Negative&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Madurai&family=Righteous&family=Signika+Negative&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   <title>Foodivity</title>
 </head>
+
 <body>
   <header class="navbar-fixed">
     <nav>
@@ -20,14 +25,23 @@
           <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Foodivity</a></li>
         </ul>
         <ul class="right">
-            <li><a href="{% url 'about' %}">About</a></li>
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'index' %}">My Profile </a></li>
-                <li><a href="{% url 'logout' %}">Log Out</a></li>
-            {% else %}
-                <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                <li><a href="{% url 'login' %}">Log In</a></li>
-            {% endif %}
+          <li><a href="{% url 'about' %}">About</a></li>
+          {% if user.is_authenticated %}
+          
+          <!-- <li><a href="">Welcome, {{ user.profile_set.first }}</a></li> -->
+          <ul id="dropdown1" class="dropdown-content">
+            <li><a href="{% url 'index' %}">View Profile</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'update_profile' user.id %}">Edit Profile</a></li>
+          </ul>
+          <li><a class="dropdown-trigger" href="" data-target="dropdown1">Profile Options</a>
+          </li>
+          <li><a href="">Logged in as {{ user }}</a></li>
+          <li><a href="{% url 'logout' %}">Log Out</a></li>
+          {% else %}
+          <li><a href="{% url 'signup' %}">Sign Up</a></li>
+          <li><a href="{% url 'login' %}">Log In</a></li>
+          {% endif %}
         </ul>
       </div>
     </nav>
@@ -39,5 +53,13 @@
   <footer class="page-footer">
     <div class="center">All Rights Reserved, &copy; 2020 Foodivity &nbsp;</div>
   </footer>
+  <script>
+    var dropdowns = document.querySelectorAll('.dropdown-trigger')
+    M.Dropdown.init(dropdowns, {
+      hover: true
+    });
+  </script>
 </body>
+
+
 </html>

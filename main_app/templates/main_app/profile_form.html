@@ -1,6 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="card">
+  {% if object %}
+    <h1>Edit Profile</h1>
+    
+    <form action="{% url 'add_photo_profile' profile.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
+      {% csrf_token %}
+      <input type="file" name="photo-file">
+      <br><br>
+      <input type="submit" class="btn" value="Change Profile Photo">
+    </form>
+  {% else %}
+    <h1>Create Profile</h1>
+  {% endif %}
   <!-- Leaving the action empty makes the form post to the same url used to display it -->
   <form action="" method="post">
     <!-- Django requires the following for security purposes -->
@@ -11,8 +24,9 @@
     </table>
     <input type="submit" value="Submit!" class="btn">
   </form>
-
-  <script>  
+    </div>
+    <script>  
+    
     var selectEl = document.getElementById('id_sex');
     M.FormSelect.init(selectEl);
     var selectEl = document.getElementById('id_activity_level');

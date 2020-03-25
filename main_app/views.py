@@ -14,6 +14,10 @@ S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'foodivity'
 
 # Create your views here.
+# def base(request):
+#   profile = Profile.objects.filter(user = request.user)
+#   return render(request, 'base.html', {'profile': profile})
+
 def home(request):
     return render(request, 'home.html')
 
@@ -84,12 +88,16 @@ def signup(request):
   return render(request, 'registration/signup.html', context)
 
 class ProfileCreate(CreateView):
-    model = Profile
-    fields = ['first_name', 'last_name', 'height', 'weight', 'sex', 'activity_level']
-    
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
+  model = Profile
+  fields = ['first_name', 'last_name', 'height', 'weight', 'sex', 'activity_level']
+  
+  def form_valid(self, form):
+      form.instance.user = self.request.user
+      return super().form_valid(form)
+
+class ProfileUpdate(UpdateView):
+  model = Profile
+  fields = ['first_name', 'last_name', 'height', 'weight', 'sex', 'activity_level']
 
 class MealUpdate(UpdateView):
   model = Meal
