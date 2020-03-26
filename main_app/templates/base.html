@@ -18,8 +18,8 @@
 </head>
 
 <body>
-  <header class="navbar-fixed">
-    <nav>
+  <header>
+    <nav class="navbar-fixed">
       <div class="nav-wrapper">
         <ul>
           <li><a href="#" class="sidenav-trigger" data-target="smallnav"><i class="material-icons">menu</i></a></li>
@@ -31,10 +31,10 @@
 
           <li><a href="{% url 'about' %}">About</a></li>
           {% if user.is_authenticated %}
-          <ul id="dropdown1" class="dropdown-content">
+          <ul id="dropdown1" class="dropdown-content blue-grey-text darken-4">
             <li><a href="{% url 'index' %}">View Profile</a></li>
             <li class="divider"></li>
-            <li><a href="{% url 'update_profile' user.id %}">Edit Profile</a></li>
+            <li><a href="{% url 'update_profile' %}">Edit Profile</a></li>
           </ul>
           <li><a class="dropdown-trigger" href="" data-target="dropdown1">Profile Options</a>
           </li>
@@ -42,7 +42,7 @@
           <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
           <li><a href="{% url 'signup' %}">Sign Up</a></li>
-          <li><a href="{% url 'login' %}">Log In</a></li>
+          <li><a href="{% url 'login' %}">Login</a></li>
           {% endif %}
         </ul>
       </div>
@@ -52,15 +52,11 @@
     <ul class="sidenav" id="smallnav">
 
       <li><a href="{% url 'about' %}">About</a></li>
-      <li class="divider"></li>
       {% if user.is_authenticated %}
 
       <li><a href="">Logged in as {{ user }}</a></li>
-      <li class="divider"></li>
         <li><a href="{% url 'index' %}">View Profile</a></li>
-        <li class="divider"></li>
-        <li><a href="{% url 'update_profile' user.id %}">Edit Profile</a></li>
-      <li class="divider"></li>
+        <li><a href="{% url 'update_profile' %}">Edit Profile</a></li>
       <li><a href="{% url 'logout' %}">Log Out</a></li>
       {% else %}
       <li><a href="{% url 'signup' %}">Sign Up</a></li>
@@ -79,12 +75,14 @@
   <script>
     var dropdowns = document.querySelectorAll('.dropdown-trigger')
     M.Dropdown.init(dropdowns, {
-      hover: true,
       coverTrigger: false
     });
 
-    var slide_menu = document.querySelectorAll(".sidenav");
-    var instance = new M.Sidenav(slide_menu);
+    var smallnavbar = document.querySelectorAll(".sidenav");
+    M.Sidenav.init(smallnavbar, {});
+
+
+
   </script>
 
 </body>

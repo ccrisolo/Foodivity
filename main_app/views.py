@@ -97,6 +97,9 @@ class ProfileCreate(CreateView):
 class ProfileUpdate(UpdateView):
   model = Profile
   fields = ['first_name', 'last_name', 'height', 'weight', 'sex', 'activity_level']
+
+  def get_object(self):
+    return self.request.user.profile
   
 class MealUpdate(UpdateView):
   model = Meal
