@@ -49,6 +49,18 @@ def today(request):
     activities = request.user.profile.activity_set.filter(date=date.today())
     return render(request, 'today.html', {'meals': meals, 'activities': activities})
 
+def all_meals(request):
+    all_meals = request.user.profile.meal_set.all()
+    return render(request, 'all_meals.html', {'all_meals': all_meals})
+
+
+
+def all_activities(request):
+    all_activities = request.user.profile.activity_set.all()
+    return render(request, 'all_activities.html', {'all_activities': all_activities})
+    
+    
+  
 def add_photo_profile(request, profile_id):
     print(profile_id)
     photo_file = request.FILES.get('photo-file', None)
