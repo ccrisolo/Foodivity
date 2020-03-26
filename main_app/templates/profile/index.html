@@ -30,6 +30,33 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">CALORIE COUNTER</span>
+    <ul class="collection">
+      <li class="collection-item">
+        <i class="material-icons">adjust</i>
+        {% if profile.sex == 'F' %} 
+        <span class="title">Suggested calories: {{ suggested_cal_female }}</span>
+        {% else %}
+        <span class="title">Suggested calories: {{ suggested_cal_male }}</span>
+        {% endif %}
+      </li>
+
+      <li class="collection-item">
+        <i class="material-icons">local_dining</i>
+        <span class="title">Calories Consumed: {{ total_calories }}</span>
+      </li>
+
+      <li class="collection-item">
+        <i class="material-icons">fitness_center</i>
+        <span class="title">Calories Burned: {{ burned_calories }}</span>
+      </li>
+    </ul>
+    </div>
+    </div>
+
+              
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">CALORIE COUNTER</span>
         {% if profile.sex == 'F' %} 
         <p>Suggested calories per day: {{ suggested_cal_female }}</p>
     {% else %}
@@ -39,20 +66,6 @@
         <p>{{ burned_calories }} calories burned</p>
       </div>
     </div>
-
-    <!-- User profile photo -->
-    <!-- {% for photo in profile.profilephoto_set.all %}
-    <img class="responsive-img card-panel" src="{{photo.url}}">
-    <a href="{% url 'delete_photo_profile' photo.id %}">Delete</a>
-    {% empty %}
-    <div class="card-panel teal-text center-align">No Photos Uploaded</div>
-    {% endfor %}
-    <form action="{% url 'add_photo_profile' profile.id %}" enctype="multipart/form-data" method="POST" class="card-panel">
-      {% csrf_token %}
-      <input type="file" name="photo-file">
-      <br><br>
-      <input type="submit" class="btn" value="Upload Photo">
-    </form> -->
 
   </div>
 
