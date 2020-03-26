@@ -22,13 +22,15 @@
     <nav>
       <div class="nav-wrapper">
         <ul>
-          <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Foodivity</a></li>
+          <li><a href="#" class="sidenav-trigger" data-target="smallnav"><i class="material-icons">menu</i></a></li>
         </ul>
-        <ul class="right">
+        <ul>
+          <li><a href="/" class="brand-logo">&nbsp;&nbsp;Foodivity</a></li>
+        </ul>
+        <ul class="right hide-on-med-and-down">
+
           <li><a href="{% url 'about' %}">About</a></li>
           {% if user.is_authenticated %}
-          
-          <!-- <li><a href="">Welcome, {{ user.profile_set.first }}</a></li> -->
           <ul id="dropdown1" class="dropdown-content">
             <li><a href="{% url 'index' %}">View Profile</a></li>
             <li class="divider"></li>
@@ -45,6 +47,27 @@
         </ul>
       </div>
     </nav>
+
+
+    <ul class="sidenav" id="smallnav">
+
+      <li><a href="{% url 'about' %}">About</a></li>
+      <li class="divider"></li>
+      {% if user.is_authenticated %}
+
+      <li><a href="">Logged in as {{ user }}</a></li>
+      <li class="divider"></li>
+        <li><a href="{% url 'index' %}">View Profile</a></li>
+        <li class="divider"></li>
+        <li><a href="{% url 'update_profile' user.id %}">Edit Profile</a></li>
+      <li class="divider"></li>
+      <li><a href="{% url 'logout' %}">Log Out</a></li>
+      {% else %}
+      <li><a href="{% url 'signup' %}">Sign Up</a></li>
+      <li><a href="{% url 'login' %}">Log In</a></li>
+      {% endif %}
+    </ul>
+
   </header>
   <main class="container">
     {% block content %}
@@ -59,7 +82,11 @@
       hover: true,
       coverTrigger: false
     });
+
+    var slide_menu = document.querySelectorAll(".sidenav");
+    var instance = new M.Sidenav(slide_menu);
   </script>
+
 </body>
 
 
