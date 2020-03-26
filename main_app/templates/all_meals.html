@@ -1,6 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
 <h1>All Meals Logged</h1>
+
+
+    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+
+
 {% for meal in all_meals %}
 <div class="card meal-card">
     <div class="card-image waves-effect waves-block waves-light">
@@ -26,6 +31,9 @@
             <input type="submit" class="btn" value="Upload Photo">
         </form>
     </div>
+</div>
+
+</div>
 </div>
 {% endfor %}
 {% endblock %}

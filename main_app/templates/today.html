@@ -8,7 +8,7 @@
 
 <div class="card">
     <div class="card-content">
-      <ul class="collection">
+      <ul class="collection collection-card">
         <li class="collection-item">
           <i class="material-icons">adjust</i>
           {% if profile.sex == 'F' %}
@@ -83,17 +83,8 @@
                 {% for activity in activities %}
 
                 <div class="card activity-card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="">
-                    </div>
                     <div class='card-content'>
-                        <span class="card-title activator grey-text text-darken-4">{{ activity.type_activity}}<i
-                                class="material-icons right">expand_less</i></span>
-                        <p>{{activity.date}}</p>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">{{ activity.type_activity}}<i
-                                class="material-icons right">expand_more</i></span>
+                        <span class="card-title grey-text text-darken-4">{{ activity.type_activity}}</span>
 
                         <p> Intensity: {{activity.activity_intensity}}</p>
                         <p> Duration: {{activity.duration}}</p>
