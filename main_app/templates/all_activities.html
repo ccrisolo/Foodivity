@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for activity in all_activities %}
+<div class="card activity-card">
+    <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" src="">
+    </div>
+    <div class='card-content'>
+        <span class="card-title activator grey-text text-darken-4">{{ activity.type_activity}}<i
+                class="material-icons right">expand_less</i></span>
+        <p>{{activity.date}}</p>
+    </div>
+    <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4">{{ activity.type_activity}}<i
+                class="material-icons right">expand_more</i></span>
+
+        <p> Intensity: {{activity.activity_intensity}}</p>
+        <p> Duration: {{activity.duration}}</p>
+        <p> Calories Burned: {{activity.calories_burned}}</p>
+        <p><a class="btn" href="{% url 'update_activity' activity.id %}"><i class="large material-icons">edit</i></a>
+            <a class="red-text text-darken-3" href="{% url 'delete_activity' activity.id %}">Delete</a></p>
+    </div>
+</div>
+
+
+{% endfor %}
+
+{% endblock %}
