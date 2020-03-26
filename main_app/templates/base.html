@@ -47,8 +47,8 @@
             <li><a href="{% url 'update_profile' %}">Add Activity</a></li>
           </ul>
           <li><a href="{% url 'today' %}">Today</a></li>
-          <li><a href="{% url 'all_meals' %}">Meal</a></li>
-          <li><a href="{% url 'all_activities' %}">Activities</a></li>
+          <li><a class="dropdown-trigger" href="{% url 'all_meals' %}" data-target="dropdown2">Meal</a></li>
+          <li><a class="dropdown-trigger" href="{% url 'all_activities' %}" data-target="dropdown3">Activities</a></li>
           <li><a class="dropdown-trigger" href="" data-target="dropdown1">Logged in as {{ user }}</a></li>
           <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
@@ -62,17 +62,36 @@
 
     <ul class="sidenav" id="smallnav">
 
+      <li><a class="sidenav-close" href="#!"><i class="material-icons">menu</i></a></li>
       <li><a href="{% url 'about' %}">About</a></li>
       {% if user.is_authenticated %}
 
-      <li><a href="">Logged in as {{ user }}</a></li>
+      <ul id="dropdown1" class="dropdown-content blue-grey-text darken-4">
+        <li><a href="{% url 'index' %}">View Profile</a></li>
+        <li class="divider"></li>
+        <li><a href="{% url 'update_profile' %}">Edit Profile</a></li>
+      </ul>
+
+      <ul id="dropdown2" class="dropdown-content blue-grey-text darken-4">
+        <li><a href="{% url 'index' %}">View All Meals</a></li>
+        <li class="divider"></li>
+        <li><a href="{% url 'update_profile' %}">Add Meal</a></li>
+      </ul>
+
+      <ul id="dropdown3" class="dropdown-content blue-grey-text darken-4">
+        <li><a href="{% url 'index' %}">View All Activities</a></li>
+        <li class="divider"></li>
+        <li><a href="{% url 'update_profile' %}">Add Activity</a></li>
+      </ul>
+      
       <li><a href="{% url 'today' %}">Today</a></li>
-      <li><a href="{% url 'index' %}">View Profile</a></li>
-      <li><a href="{% url 'update_profile' %}">Edit Profile</a></li>
+      <li><a class="dropdown-trigger" href="{% url 'all_meals' %}" data-target="dropdown2">Meal</a></li>
+      <li><a class="dropdown-trigger" href="{% url 'all_activities' %}" data-target="dropdown3">Activities</a></li>
+      <li><a class="dropdown-trigger" href="" data-target="dropdown1">Logged in as {{ user }}</a></li>
       <li><a href="{% url 'logout' %}">Log Out</a></li>
       {% else %}
       <li><a href="{% url 'signup' %}">Sign Up</a></li>
-      <li><a href="{% url 'login' %}">Log In</a></li>
+      <li><a href="{% url 'login' %}">Login</a></li>
       {% endif %}
     </ul>
 
