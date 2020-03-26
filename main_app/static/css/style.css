@@ -22,7 +22,11 @@ body {
   color: var(--darkg);
 }
 
-nav{
+.container {
+  margin: 30px auto;
+}
+
+nav {
   background-color: rgba(45, 46, 50, 0.8);
   box-shadow: transparent;
 }
@@ -30,14 +34,15 @@ nav{
 h1 {
   font-weight: bolder;
   font-size: 3rem;
+  text-align: center;
+  margin: 0;
+  /* color: var(--white); */
 }
 
 h2 {
   font-size: 2rem;
-}
-
-.left {
-  float: left;
+  text-align: center;
+  color: var(--white);
 }
 
 .brand-logo {
@@ -50,7 +55,7 @@ main {
 
 .card {
   font-weight: bolder;
-  background-color: rgba(255, 255, 255, .5);
+  background-color: rgba(255, 255, 255, .7);
   box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 1), 0 4px 25px 0px rgba(0, 0, 0, 0.4), 0 8px 10px -5px rgba(0, 0, 0, 0.6);
 }
 
@@ -58,16 +63,50 @@ main {
   box-shadow: rgba(0, 0, 0, 0.56) 0px 16px 38px -12px, rgba(0, 0, 0, 0.12) 0px 4px 25px 0px, rgba(0, 0, 0, 0.2) 0px 8px 10px -5px;
 }
 
-th {
-  color: black;
+label, th, .small-title {
+  font-size: 1rem;
+  color: var(--darkg);
 }
 
-.btn {
+tr {
+  border-bottom: none;
+}
+
+.btn:hover, .btn:active {
+  background-color: #ffee58;
+}
+
+.btn, .datepicker-date-display, .datepicker-table td.is-selected  {
   background-color: var(--yellow);
 }
 
-.btn:hover{
-  background-color: springgreen;
+.dropdown-content li>a, .datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done {
+  color: var(--darkg);
+}
+
+input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):focus:not([readonly]), input[type=password]:not(.browser-default):focus:not([readonly]), input[type=email]:not(.browser-default):focus:not([readonly]), input[type=url]:not(.browser-default):focus:not([readonly]), input[type=time]:not(.browser-default):focus:not([readonly]), input[type=date]:not(.browser-default):focus:not([readonly]), input[type=datetime]:not(.browser-default):focus:not([readonly]), input[type=datetime-local]:not(.browser-default):focus:not([readonly]), input[type=tel]:not(.browser-default):focus:not([readonly]), input[type=number]:not(.browser-default):focus:not([readonly]), input[type=search]:not(.browser-default):focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) { 
+  border-bottom: 1px solid var(--darkg);
+  box-shadow: 0 1px 0 0 var(--darkg);
+}
+
+.select-wrapper input.select-dropdown:focus {
+  border-bottom: 1px solid var(--darkg);
+}
+
+.dropdown-content li>a, .dropdown-content li>span {
+  color: var(--darkg);
+}
+
+.collection .collection-item {
+  padding: 10px 10px;
+  line-height: 24px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.collection .collection-item i {
+  padding-right: 5px;
 }
 
 footer.page-footer {
