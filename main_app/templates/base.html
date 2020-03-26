@@ -38,6 +38,7 @@
           </ul>
           <li><a class="dropdown-trigger" href="" data-target="dropdown1">Profile Options</a>
           </li>
+          <li><a href="{% url 'today' %}">Today</a></li>
           <li><a href="">Logged in as {{ user }}</a></li>
           <li><a href="{% url 'logout' %}">Log Out</a></li>
           {% else %}
@@ -47,23 +48,24 @@
         </ul>
       </div>
     </nav>
-
-
+    
+    
     <ul class="sidenav" id="smallnav">
-
+      
       <li><a href="{% url 'about' %}">About</a></li>
       {% if user.is_authenticated %}
-
+      
       <li><a href="">Logged in as {{ user }}</a></li>
-        <li><a href="{% url 'index' %}">View Profile</a></li>
-        <li><a href="{% url 'update_profile' %}">Edit Profile</a></li>
+      <li><a href="{% url 'today' %}">Today</a></li>
+      <li><a href="{% url 'index' %}">View Profile</a></li>
+      <li><a href="{% url 'update_profile' %}">Edit Profile</a></li>
       <li><a href="{% url 'logout' %}">Log Out</a></li>
       {% else %}
       <li><a href="{% url 'signup' %}">Sign Up</a></li>
       <li><a href="{% url 'login' %}">Log In</a></li>
       {% endif %}
     </ul>
-
+    
   </header>
   <main class="container">
     {% block content %}

@@ -9,6 +9,8 @@ import boto3
 
 from .models import Profile, Meal, Activity, ProfilePhoto, MealPhoto
 from .forms import MealForm
+from datetime import date
+
 
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'foodivity'
@@ -41,6 +43,12 @@ def add_meal(request, profile_id):
         new_meal.save()
     return redirect('index')
 
+
+def today(request):
+    meals = request.user.profile.meal_set.filter(date=date.today())
+    activities = request.user.profile.activity_set.filter(date=date.today())
+    return render(request, 'today.html', {'meals': meals, 'activities': activities})
+
 def add_photo_profile(request, profile_id):
     print(profile_id)
     photo_file = request.FILES.get('photo-file', None)
@@ -70,7 +78,7 @@ def add_photo_meal(request, meal_id):
             photo.save()
         except:
             print('An error occurred uploading file to S3')
-    return redirect('index')
+    return redirect('today')
 
 def signup(request):
   error_message = ''
