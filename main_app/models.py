@@ -59,6 +59,10 @@ class Meal(models.Model):
     def get_absolute_url(self):
         return reverse('index')
 
+    class Meta:
+        ordering = ['-date']
+
+
 class Activity(models.Model):
     date = models.DateField(
         blank=True,

@@ -12,6 +12,7 @@ from .forms import MealForm
 from datetime import date
 
 
+
 S3_BASE_URL = 'https://s3-us-west-1.amazonaws.com/'
 BUCKET = 'foodivity'
 
