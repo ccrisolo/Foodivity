@@ -34,7 +34,7 @@
           <ul id="dropdown1" class="dropdown-content blue-grey-text darken-4">
             <li><a href="{% url 'index' %}">View Profile</a></li>
             <li class="divider"></li>
-            <li><a href="{% url 'update_profile' user.id %}">Edit Profile</a></li>
+            <li><a href="{% url 'update_profile' %}">Edit Profile</a></li>
           </ul>
           <li><a class="dropdown-trigger" href="" data-target="dropdown1">Profile Options</a>
           </li>
@@ -56,7 +56,7 @@
 
       <li><a href="">Logged in as {{ user }}</a></li>
         <li><a href="{% url 'index' %}">View Profile</a></li>
-        <li><a href="{% url 'update_profile' user.id %}">Edit Profile</a></li>
+        <li><a href="{% url 'update_profile' %}">Edit Profile</a></li>
       <li><a href="{% url 'logout' %}">Log Out</a></li>
       {% else %}
       <li><a href="{% url 'signup' %}">Sign Up</a></li>

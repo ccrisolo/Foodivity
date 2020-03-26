@@ -20,7 +20,7 @@
 
           <img class="responsive-img" src="{{ profile.profilephoto_set.last }}">
           {% empty %}
-          <span><a class="blue-grey-text textdarken-4" href="{% url 'update_profile' user.id %}">Add Profile Pic</a></span>
+          <span><a class="blue-grey-text textdarken-4" href="{% url 'update_profile' %}">Add Profile Pic</a></span>
 
           {% endfor %}
 
