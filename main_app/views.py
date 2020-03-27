@@ -32,9 +32,10 @@ def profile_index(request):
     suggested_cal_male = ((10 * profile.weight) + (6.25 * profile.height) + 5)
     suggested_cal_female = ((10 * profile.weight) + (6.25 * profile.height) - 161)
     total_calories = sum(meal.calories for meal in meals)
-    burned_calories = sum(activity.calories_burned for activity in activities)
-    remaining_calories = (total_calories - burned_calories)
-    return render(request, 'profile/index.html', {'profile': profile, 'meal_form': meal_form, 'total_calories': total_calories, 'burned_calories': burned_calories, 'remaining_calories': remaining_calories, 'suggested_cal_male': suggested_cal_male, 'suggested_cal_female': suggested_cal_female})
+    # burned_calories = sum(activity.calories_burned for activity in activities)
+    # remaining_calories = (total_calories - burned_calories)
+    # return render(request, 'profile/index.html', {'profile': profile, 'meal_form': meal_form, 'total_calories': total_calories, 'burned_calories': burned_calories, 'remaining_calories': remaining_calories, 'suggested_cal_male': suggested_cal_male, 'suggested_cal_female': suggested_cal_female})
+    return render(request, 'profile/index.html', {'profile': profile, 'meal_form': meal_form})
 
 def add_meal(request, profile_id):
     form = MealForm(request.POST)
@@ -132,11 +133,22 @@ class MealDelete(DeleteView):
   
 class ActivityCreate(CreateView):
   model = Activity 
-  fields = ['type_activity', 'duration', 'calories_burned', 'date', 'activity_intensity']
+  fields = ['type_activity', 'duration', 'date', 'activity_intensity']
   success_url = '/profile/'
   
   def form_valid(self, form):
     form.instance.user = self.request.user
+    intensity_level = 1
+    print(form.instance)
+    if form.instance.activity_intensity == 'L': 
+      intensity_level = 5
+    elif form.instance.activity_intensity == 'M':
+      intensity_level = 7.6
+    elif form.instance.activity_intensity == 'S':
+      intensity_level = 12.1
+    elif form.instance.activity_intensity == 'V':
+      intensity_level = 15.3
+    form.instance.calories_burned = form.instance.duration * intensity_level
     # url params are available as a kwarg on self as follows
     form.instance.profile_id = self.kwargs['profile_id']
     return super().form_valid(form)
