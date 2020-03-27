@@ -32,18 +32,18 @@ def profile_index(request):
     suggested_cal_male = ((10 * profile.weight) + (6.25 * profile.height) + 5)
     suggested_cal_female = ((10 * profile.weight) + (6.25 * profile.height) - 161)
     total_calories = sum(meal.calories for meal in meals)
-    # burned_calories = sum(activity.calories_burned for activity in activities)
-    # remaining_calories = (total_calories - burned_calories)
-    # return render(request, 'profile/index.html', {'profile': profile, 'meal_form': meal_form, 'total_calories': total_calories, 'burned_calories': burned_calories, 'remaining_calories': remaining_calories, 'suggested_cal_male': suggested_cal_male, 'suggested_cal_female': suggested_cal_female})
-    return render(request, 'profile/index.html', {'profile': profile, 'meal_form': meal_form})
+    burned_calories = sum(activity.calories_burned for activity in activities)
+    remaining_calories = (total_calories - burned_calories)
+    return render(request, 'profile/index.html', {'profile': profile, 'meal_form': meal_form, 'total_calories': total_calories, 'burned_calories': burned_calories, 'remaining_calories': remaining_calories, 'suggested_cal_male': suggested_cal_male, 'suggested_cal_female': suggested_cal_female})
+    # return render(request, 'profile/index.html', {'profile': profile, 'meal_form': meal_form})
 
-def add_meal(request, profile_id):
-    form = MealForm(request.POST)
-    if form.is_valid():
-        new_meal = form.save(commit=False)
-        new_meal.profile_id = profile_id
-        new_meal.save()
-    return redirect('index')
+# def add_meal(request, profile_id):
+#     form = MealForm(request.POST)
+#     if form.is_valid():
+#         new_meal = form.save(commit=False)
+#         new_meal.profile_id = profile_id
+#         new_meal.save()
+#     return redirect('index')
 
 
 def today(request):
@@ -92,7 +92,7 @@ def add_photo_meal(request, meal_id):
             photo.save()
         except:
             print('An error occurred uploading file to S3')
-    return redirect('today')
+    return redirect('all_meals')
 
 def signup(request):
   error_message = ''
@@ -122,6 +122,16 @@ class ProfileUpdate(UpdateView):
 
   def get_object(self):
     return self.request.user.profile
+
+class MealCreate(CreateView):
+  model = Meal
+  fields = ['date', 'name', 'ingredients', 'calories']
+  success_url = '/meals/'
+
+  def form_valid(self, form):
+    form.instance.user = self.request.user
+    form.instance.profile_id = self.kwargs['profile_id']
+    return super().form_valid(form)
   
 class MealUpdate(UpdateView):
   model = Meal
@@ -129,12 +139,13 @@ class MealUpdate(UpdateView):
 
 class MealDelete(DeleteView):
   model = Meal
-  success_url = '/profile/'
+  success_url = '/meals/'
+
   
 class ActivityCreate(CreateView):
   model = Activity 
   fields = ['type_activity', 'duration', 'date', 'activity_intensity']
-  success_url = '/profile/'
+  success_url = '/activities/'
   
   def form_valid(self, form):
     form.instance.user = self.request.user
@@ -159,7 +170,7 @@ class ActivityUpdate(UpdateView):
   
 class ActivityDelete(DeleteView):
   model = Activity
-  success_url = '/profile/'
+  success_url = '/activities/'
   
 class ProfilePhotoDelete(DeleteView):
   model = ProfilePhoto

@@ -3,6 +3,7 @@
 {% block content %}
 <div class="card">
 <div class="card-content">
+  <h1>Add Meal</h1>
   {% if object %}
     <h1>Edit {{object.name}} on {{object.date}}</h1>
   {% endif %}
@@ -15,4 +16,13 @@
       </form>
     </div>
   </div>
+  <script>
+    var dateEl = document.getElementById('id_date');
+    M.Datepicker.init(dateEl, {
+      format: 'yyyy-mm-dd',
+      defaultDate: new Date(),
+      setDefaultDate: true,
+      autoClose: true
+    });
+  </script>
 {% endblock %}

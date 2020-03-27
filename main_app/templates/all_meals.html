@@ -3,10 +3,11 @@
 <h1>All Meals Logged</h1>
 
 
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+    <div class="row">
 
 
 {% for meal in all_meals %}
+<div class="col s10 offset-s1 m6 l4">
 <div class="card meal-card">
     <div class="card-image waves-effect waves-block waves-light">
         <img class="activator" src="{{ meal.mealphoto_set.last.url }}">
@@ -34,6 +35,6 @@
 </div>
 
 </div>
-</div>
 {% endfor %}
+</div>
 {% endblock %}
