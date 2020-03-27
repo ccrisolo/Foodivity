@@ -5,11 +5,11 @@
 <!-- <h1 class="center">{{ profile.first_name }}'s Profile</h1> -->
 
 <h1>Hi, {{profile.first_name}}!</h1>
-<h2>What did you do today?</h2>
+
 
 <div class="row">
 
-  <div class="col s10 offset-s1 m4 l4">
+  <div class="col s12 m6 offset-m3 l6 offset-l3">
 
     <!-- User profile info -->
     <div class="card">
@@ -61,105 +61,5 @@
     </div>
   </div>
 
-  <div class="col s12 m8 l7 offset-l1">
-
-    <!-- Meal Info -->
-    <div class="card">
-      <div class="card-content">
-        <span class="card-title">MEALS</span>
-
-        <!-- Add meal -->
-        <form action="{% url 'add_meal' profile.id %}" method="post">
-          {% csrf_token %}
-          {{ meal_form.as_p }}
-          <input type="submit" class="btn" value="Add Meal">
-        </form>
-
-        <br>
-        <div class="divider"></div>
-        <br>
-
-        <!-- New view meal-->
-        {% for meal in profile.meal_set.all %}
-        <div class="card meal-card">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src="{{ meal.mealphoto_set.last.url }}">
-          </div>
-          <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4">{{ meal.name }}<i
-                class="material-icons right">expand_less</i></span>
-            <p>{{meal.date}}</p>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">{{ meal.name }}<i
-                class="material-icons right">expand_more</i></span>
-
-            <p>Ingredients: {{meal.ingredients}}</p>
-            <p>Calories: {{meal.calories}}</p>
-            <br>
-            <p><a class="btn" href="{% url 'update_meal' meal.id %}"><i class="large material-icons">edit</i></a>
-              <a class="red-text text-darken-3" href="{% url 'delete_meal' meal.id %}">Delete</a></p>
-            <br>
-            <form action="{% url 'add_photo_meal' meal.id %}" enctype="multipart/form-data" method="POST"
-              class="card-panel">
-              {% csrf_token %}
-              <input type="file" name="photo-file">
-              <br><br>
-              <input type="submit" class="btn" value="Upload Photo">
-            </form>
-          </div>
-        </div>
-        {% endfor %}
-
-
-      </div>
-    </div>
-
-    <!-- Activity info -->
-    <div class="card">
-      <div class="card-content">
-        <span class="card-title">ACTIVITIES</span>
-        <div style="overflow-x:auto;">
-          <table class="striped">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Activity Type</th>
-                <th>Intensity</th>
-                <th>Duration</th>
-                <th>Calories Burned</th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for activity in profile.activity_set.all %}
-              <tr>
-                <td>{{ activity.date }}</td>
-                <td>{{ activity.type_activity }}</td>
-                <td>{{ activity.activity_intensity }}</td>
-                <td>{{ activity.duration }}</td>
-                <td>{{activity.calories_burned}}</td>
-                <td>
-                  <a class="btn" href="{% url 'update_activity' activity.id %}"><i
-                      class="large material-icons">edit</i></a>
-                  <a class="red-text text-darken-3" href="{% url 'delete_activity' activity.id %}">Delete</a>
-                </td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-          <a class="blue-grey-text textdarken-4" href="{% url 'activity_create' profile.id %}">Add Activity</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<script>
-  var dateEl = document.getElementById('id_date');
-  M.Datepicker.init(dateEl, {
-    format: 'yyyy-mm-dd',
-    defaultDate: new Date(),
-    setDefaultDate: true,
-    autoClose: true
-  });
-</script>
+ </div> 
 {% endblock %}

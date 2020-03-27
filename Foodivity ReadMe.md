@@ -6,12 +6,24 @@
 
 ## Screenshots
 
-[img1]:https://i.imgur.com/nSgpgYK.png
+[img1]:https://i.imgur.com/GAQnJAm.jpg
 ![img1]
+
+[img2]:https://i.imgur.com/94dWRer.jpg
+![img2]
+
+[img3]:https://i.imgur.com/IluPE9f.jpg
+![img3]
+
+[img4]:https://i.imgur.com/4eJNwdo.jpg
+![img4]
+
+[img5]:https://i.imgur.com/h8LaoUi.jpg
+![img5]
 
 
 ## Technologies Used
-Python, Django, Postgreql, CSS, HTML, Heroku, Amazon AWS 
+Python, Django, Postgreql, CSS, HTML, Heroku, Amazon AWS, JavaScript, Materialize 
 
 ## Getting Started
 [Click to try Foodivity]: https://foodivity.herokuapp.com/
@@ -27,5 +39,12 @@ Python, Django, Postgreql, CSS, HTML, Heroku, Amazon AWS
 [Click for Github]
 
 ##Next Steps
+Additional feature updates will include:
+- Logging Sleep
+- Food API to auto calculate calories
+- Ability to bookmark favorite meals
+- Recommendations for food based on goals
+
+	
 
 

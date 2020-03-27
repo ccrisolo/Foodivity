@@ -40,13 +40,12 @@ h1 {
   text-align: center;
   margin: 0;
   padding: 30px;
-  /* color: var(--white); */
 }
 
 h2 {
   font-size: 2rem;
   text-align: center;
-  color: var(--white);
+  color: var(--darkg);
 }
 
 .brand-logo {
@@ -126,4 +125,8 @@ input:not([type]):focus:not([readonly]), input[type=text]:not(.browser-default):
 footer.page-footer {
   padding-top: 0;
   background-color: var(--dark);
+}
+
+.valign-wrapper {
+  height: 80vh;
 }
