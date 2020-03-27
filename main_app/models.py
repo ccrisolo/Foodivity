@@ -70,7 +70,10 @@ class Activity(models.Model):
     )
     type_activity =  models.CharField(max_length=100)
     duration = models.IntegerField()
-    calories_burned = models.IntegerField()
+    calories_burned = models.IntegerField(
+        blank=True,
+        null=True
+    )
     # changed to autofill calories based on duration and intensity 
     activity_intensity = models.CharField(
         max_length=1,
