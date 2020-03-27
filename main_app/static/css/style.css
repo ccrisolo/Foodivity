@@ -53,6 +53,12 @@ h2 {
   font-family: 'Righteous', cursive;
 }
 
+.sidenav {
+  height: auto;
+  padding-top: 0;
+  padding-bottom:0;
+}
+
 main {
   flex: 1 0 auto;
 }
