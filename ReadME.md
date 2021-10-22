@@ -2,7 +2,7 @@
 
 ## Description
 
-#####Foodivity is your personal food and activity logging app. Created for people looking to track their food intake and activity levels , Foodivity is an easy way to log food, calories and activites in order to get a better picture of what we put in our body on a regular basis. Users can post a profile photo and photos of each meal. Each user is given an estimated suggested calories per day based off of their profile info.  
+Foodivity is your personal food and activity logging app. Created for people looking to track their food intake and activity levels , Foodivity is an easy way to log food, calories and activites in order to get a better picture of what we put in our body on a regular basis. Users can post a profile photo and photos of each meal. Each user is given an estimated suggested calories per day based off of their profile info.  
 
 ## Screenshots
 
